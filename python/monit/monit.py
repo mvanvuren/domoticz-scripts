@@ -3,7 +3,7 @@ import urllib.request, xml.etree.ElementTree as ET
 import os
 
 MONIT_URL = os.environ['MONIT_URL']
-HEALTHCHECKS_URL = os.environ['MONIT_URL']
+HEALTHCHECKS_URL = os.environ['HEALTHCHECKS_URL']
 
 isMonitAlive = True
 root = None
