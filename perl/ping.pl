@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+use File::Basename;
 use DBI;
 use Net::Ping;
 use LWP::Simple;
@@ -20,8 +21,8 @@ if (!$p->ping($ROUTER_IP)) { # gateway can't be reached
 	exit;
 }
 $p->close();
-
-my $dbh = DBI->connect('dbi:SQLite:dbname=/root/domoticz/scripts/perl/ping.s3db', '', '', { RaiseError => 1 }) or die $DBI::errstr;
+my $db_path = dirname(__FILE__);
+my $dbh = DBI->connect("dbi:SQLite:dbname=$db_path/ping.s3db", '', '', { RaiseError => 1 }) or die $DBI::errstr;
 my $dbpresent = $dbh->prepare( "UPDATE Device SET LastTime = ?, Present = ? WHERE Idx = ?" );  
 my $dbselect = $dbh->prepare( "SELECT * FROM Device" );  
 my $row;

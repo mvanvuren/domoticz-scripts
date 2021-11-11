@@ -1,5 +1,6 @@
 .archive/
 .vscode/
+.vstags
 
 buienradar_rain_example.pl
 domoticz.conf
