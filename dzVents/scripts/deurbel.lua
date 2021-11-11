@@ -8,7 +8,7 @@ return {
 
             doorbell.switchOff().afterSec(30)
 
-            domoticz.helpers.snapshot()
+            domoticz.helpers.snapshotFront(domoticz)
 
             if (domoticz.time.isNightTime) then
                 if (domoticz.devices('Hal lamp').state == 'Off') then
