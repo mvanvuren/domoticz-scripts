@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "dzVents"
+		},
+		{
+			"path": "perl"
+		},
+		{
+			"path": "python"
+		},
+		{
+			"path": "shell"
+		}
+	],
+	"settings": {}
+}
