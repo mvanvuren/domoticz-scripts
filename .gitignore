@@ -20,6 +20,8 @@ logrotate/
 lua/
 lua_parsers/
 
+perl/ping.s3db
+
 __pycache__
 !python/
 python/*
