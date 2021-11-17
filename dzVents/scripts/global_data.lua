@@ -2,10 +2,12 @@ return {
     helpers = {
         sms = function(domoticz, subject, message)
             local text = subject .. ' ' .. message
-            local previousText = domoticz.variables('SMS').value
-            if (string.sub(previousText, 1, 3) ~= string.sub(text, 1, 3)) then -- save some money ;-)
+            local smsVariable = domoticz.variables('SMS')
+            local previousText = smsVariable.value
+            if (smsVariable.lastUpdate.daysAgo > 0
+                and string.sub(previousText, 1, 3) ~= string.sub(text, 1, 3)) then -- save some money ;-)
                 domoticz.executeShellCommand("(/root/scripts/sms.sh '" .. text .. "')&")
-                domoticz.variables('SMS').set(text)
+                smsVariable.set(text)
             end
         end,
         snapshotFront = function(domoticz)

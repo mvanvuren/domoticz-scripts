@@ -40,8 +40,8 @@ my $SECONDS_PER_DAY = 86400;
 my $SECONDS_PER_MINUTE = 60;
 my $MAX_WORKING_TIME_IN_MINUTES = 60;
 my %SCHEDULED_DAYS = ( 1 => 'Mon', 2 => 'Tue', 3 => 'Wed', 4 => 'Thu' );
-my $SCHEDULED_START_HOUR = 9;
-my $SCHEDULED_END_HOUR = 24;
+my $SCHEDULED_START_HOUR = 12;
+my $SCHEDULED_END_HOUR = 17;
 my $ACTIVATE_TURBO_MODE = 0;
 
 #log_message('start: ' . basename($0));
