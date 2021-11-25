@@ -6,7 +6,7 @@ use Net::Ping;
 my $STOFFIE_IP = $ENV{STOFFIE_IP};
 
 my $p = Net::Ping->new('icmp');
-my $ping = $p->ping($STOFFIE_IP);
+my $ping = $p->ping($STOFFIE_IP, 10);
 $p->close();
 if (!$ping) {
     print("Stoffie doesn't respond\n");
