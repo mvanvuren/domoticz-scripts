@@ -1,1 +1,0 @@
-TODO: use domoticz virtual sensor data for regen.lua 
