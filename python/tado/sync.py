@@ -14,7 +14,7 @@ LEONIE_IDX = 209
 ANYONE_IDX = 434
 
 
-def update_status_domoticz(idx, at_home) :
+def update_status_domoticz(idx, at_home):
     """update status in domoticz"""
     if at_home is None :
         return
@@ -27,18 +27,18 @@ def update_status_domoticz(idx, at_home) :
         )
 
 
-def get_status_tado() :
+def get_status_tado():
     """get status tado"""
     tado = Tado(TADO_USR, TADO_PWD, TADO_TOK)
 
     users = tado.get_users()
 
     martijn_at_home = users[1]["mobileDevices"][0]["location"]
-    if martijn_at_home is not None :
+    if martijn_at_home is not None:
         martijn_at_home = martijn_at_home["atHome"]
 
     leonie_at_home = users[0]["mobileDevices"][0]["location"]
-    if leonie_at_home is not None :
+    if leonie_at_home is not None:
         leonie_at_home = leonie_at_home["atHome"]
 
     return (martijn_at_home, leonie_at_home)

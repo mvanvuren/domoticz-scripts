@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """bridge between monit and healtchecks for failing services"""
+import os
 import urllib.request
 import xml.etree.ElementTree as ET
-import os
 
 MONIT_URL = os.environ["MONIT_URL"]
 HEALTHCHECKS_URL = os.environ["HEALTHCHECKS_URL"]
