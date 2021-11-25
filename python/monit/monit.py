@@ -1,25 +1,34 @@
 #!/usr/bin/python3
-import urllib.request, xml.etree.ElementTree as ET
+"""bridge between monit and healtchecks for failing services"""
+import urllib.request
+import xml.etree.ElementTree as ET
 import os
 
 MONIT_URL = os.environ['MONIT_URL']
 HEALTHCHECKS_URL = os.environ['HEALTHCHECKS_URL']
 
-isMonitAlive = True
-root = None
-try:
-    request = urllib.request.urlopen(f"{MONIT_URL}/_status?format=xml")
-    root = ET.fromstring(request.read().decode())
+def get_monit_data():
+    """retrieve information from monit api"""
+    try:
+        request = urllib.request.urlopen(f"{MONIT_URL}/_status?format=xml")
+        root = ET.fromstring(request.read().decode())
 
-except ValueError:
-    isMonitAlive = False
+    except ValueError:
+        return (False, False)
 
-allServicesAlive = isMonitAlive
-if isMonitAlive:
     for status in root.iter('status'):
         if int(status.text) != 0:
-            allServicesAlive = False
-            break
+            return (True, False)
 
-urllib.request.urlopen(f"{HEALTHCHECKS_URL}/ping/ce7ae874-0d0d-4f7b-8f23-3e93231f831d" + ('/fail' if not isMonitAlive else ''))
-urllib.request.urlopen(f"{HEALTHCHECKS_URL}/ping/09316e6e-b76b-4aed-8551-e91769836454" + ('/fail' if not allServicesAlive else ''))
+    return (True, True)
+
+def update_healthchecks(is_monit_alive, all_services_alive):
+    """update healtchecks"""
+    urllib.request.urlopen(
+        f"{HEALTHCHECKS_URL}/ping/ce7ae874-0d0d-4f7b-8f23-3e93231f831d"
+        + ('/fail' if not is_monit_alive else ''))
+    urllib.request.urlopen(
+        f"{HEALTHCHECKS_URL}/ping/09316e6e-b76b-4aed-8551-e91769836454"
+        + ('/fail' if not all_services_alive else ''))
+
+update_healthchecks(*get_monit_data())

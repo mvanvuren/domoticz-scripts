@@ -1,4 +1,6 @@
 #!/usr/bin/perl
+use strict;
+use warnings;
 use Net::Ping;
 
 my $STOFFIE_IP = $ENV{STOFFIE_IP};

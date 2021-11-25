@@ -44,9 +44,6 @@ my $SCHEDULED_START_HOUR = 12;
 my $SCHEDULED_END_HOUR = 17;
 my $ACTIVATE_TURBO_MODE = 0;
 
-#log_message('start: ' . basename($0));
-sub max ($$) { $_[$_[0] < $_[1]] }
-
 exit_if_not_scheduled();
 
 my ($domo_switch_status, $domo_status, $domo_lasttime) = get_info_domoticz();
@@ -94,7 +91,7 @@ sub get_status_domoticz {
 sub get_info_domoticz {
 	my ($domo_switch_status, $domo_switch_status_lasttime) = get_switch_status_domoticz();
 	my ($domo_status, $domo_status_lasttime) = get_status_domoticz();
-	my $domo_lasttime = max($domo_switch_status_lasttime, $domo_status_lasttime);
+	my $domo_lasttime = $domo_switch_status_lasttime >= $domo_status_lasttime ? $domo_switch_status_lasttime : $domo_status_lasttime;
 
 	return ($domo_switch_status, $domo_status, $domo_lasttime);
 }

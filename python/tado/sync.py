@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""update presence from Tado"""
 import os
 import requests
 from libtado.api import Tado
@@ -12,33 +13,36 @@ MARTIJN_IDX = 193
 LEONIE_IDX = 209
 ANYONE_IDX = 434
 
-def updateStatusDomoticz(idx, atHome) :
-    if (atHome is None) :
+def update_status_domoticz(idx, at_home) :
+    """update status in domoticz"""
+    if at_home is None :
         return
 
     response = requests.get(f"{DOMO_URL}/json.htm?type=devices&rid={idx}")
-    if ((response.json()['result'][0]['Status'] == 'On') != atHome) :
-        requests.get(f"{DOMO_URL}/json.htm?type=command&param=switchlight&idx={idx}&switchcmd=" + ('On' if atHome else 'Off'))
+    if (response.json()['result'][0]['Status'] == 'On') != at_home :
+        requests.get(
+            f"{DOMO_URL}/json.htm?type=command&param=switchlight&idx={idx}&switchcmd="
+            + ('On' if at_home else 'Off')
+        )
 
-def getStatusTado() :
+def get_status_tado() :
+    """get status tado"""
     tado = Tado(TADO_USR, TADO_PWD, TADO_TOK)
 
     users = tado.get_users()
 
-    #print(users)
+    martijn_at_home = users[1]['mobileDevices'][0]['location']
+    if martijn_at_home is not None :
+        martijn_at_home = martijn_at_home['atHome']
 
-    martijnAtHome = users[1]['mobileDevices'][0]['location']
-    if (martijnAtHome is not None) :
-        martijnAtHome = martijnAtHome['atHome']
+    leonie_at_home = users[0]['mobileDevices'][0]['location']
+    if leonie_at_home is not None :
+        leonie_at_home = leonie_at_home['atHome']
 
-    leonieAtHome = users[0]['mobileDevices'][0]['location']
-    if (leonieAtHome is not None) :
-        leonieAtHome = leonieAtHome['atHome']
+    return (martijn_at_home, leonie_at_home)
 
-    return (martijnAtHome, leonieAtHome)
+(martijn, leonie) = get_status_tado()
 
-(martijnAtHome, leonieAtHome) = getStatusTado()
-
-updateStatusDomoticz(MARTIJN_IDX, martijnAtHome)
-updateStatusDomoticz(LEONIE_IDX, leonieAtHome)
-updateStatusDomoticz(ANYONE_IDX, martijnAtHome or leonieAtHome)
+update_status_domoticz(MARTIJN_IDX, martijn)
+update_status_domoticz(LEONIE_IDX, leonie)
+update_status_domoticz(ANYONE_IDX, martijn or leonie)
