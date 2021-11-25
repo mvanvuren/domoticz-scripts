@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """update presence from Tado"""
 import os
+
 import requests
 from libtado.api import Tado
 
@@ -16,11 +17,11 @@ ANYONE_IDX = 434
 
 def update_status_domoticz(idx, at_home):
     """update status in domoticz"""
-    if at_home is None :
+    if at_home is None:
         return
 
     response = requests.get(f"{DOMO_URL}/json.htm?type=devices&rid={idx}")
-    if (response.json()["result"][0]["Status"] == "On") != at_home :
+    if (response.json()["result"][0]["Status"] == "On") != at_home:
         requests.get(
             f"{DOMO_URL}/json.htm?type=command&param=switchlight&idx={idx}&switchcmd="
             + ("On" if at_home else "Off")
