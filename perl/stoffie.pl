@@ -106,7 +106,7 @@ sub get_info_stoffie {
 	exit if ($stoffie_status{'JSON_ROBOT_STATE'} eq '' || $stoffie_status{'JSON_BATTPERC'} eq '');
 	
 	my $stoffie_status = $stoffie_status{'JSON_ROBOT_STATE'};
-	my $stoffie_battery = $stoffie_status{'JSON_BATTPERC'};
+	my $stoffie_battery = int($stoffie_status{'JSON_BATTPERC'});
 
 	return ($stoffie_status, $stoffie_battery);
 }
@@ -140,7 +140,7 @@ sub shutdown_stoffie {
 
 sub exit_if_not_ready {
 	my $p = Net::Ping->new('icmp');
-	my $ping = $p->ping($STOFFIE_IP, 2);
+	my $ping = $p->ping($STOFFIE_IP);
 	$p->close();
 	if (!$ping) {
 		shutdown_stoffie(); # Stoffie doesn't respond

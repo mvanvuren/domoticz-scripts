@@ -16,5 +16,7 @@
 			"path": "shell"
 		}
 	],
-	"settings": {}
+    "settings": {
+        "editor.detectIndentation": false
+    }
 }

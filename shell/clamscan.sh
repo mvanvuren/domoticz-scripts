@@ -6,7 +6,7 @@ DIRTOSCAN="/root"
 for S in ${DIRTOSCAN}; do
 	DIRSIZE=$(du -sh "$S" 2>/dev/null | cut -f1)
 
-	echo "Starting a weekly scan of "${S}" directory. Amount of data to be scanned is "${DIRSIZE}"."
+	echo "Starting a weekly scan of $S directory. Amount of data to be scanned is $DIRSIZE."
 
 	clamscan -ri "${S}" >>"${LOG_FILE}"
 

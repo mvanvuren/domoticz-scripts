@@ -9,9 +9,9 @@ LOG_FILE="${LOG_PATH}/speedtest/speedtest.txt"
 
 /usr/bin/speedtest-cli --simple >"${LOG_FILE}"
 
-download=$(printf "%.*f" 1 $(sed -ne 's/^Download: \([0-9]*\.[0-9]*\).*/\1/p' < ${LOG_FILE}))
-upload=$(printf "%.*f" 1 $(sed -ne 's/^Upload: \([0-9]*\.[0-9]*\).*/\1/p' < ${LOG_FILE}))
-png=$(printf "%.*f" 1 $(sed -ne 's/^Ping: \([0-9]*\.[0-9]*\).*/\1/p' < ${LOG_FILE}))
+download=$(printf "%.*f" 1 $(sed -ne 's/^Download: \([0-9]*\.[0-9]*\).*/\1/p' < "${LOG_FILE}"))
+upload=$(printf "%.*f" 1 $(sed -ne 's/^Upload: \([0-9]*\.[0-9]*\).*/\1/p' < "${LOG_FILE}"))
+png=$(printf "%.*f" 1 $(sed -ne 's/^Ping: \([0-9]*\.[0-9]*\).*/\1/p' < "${LOG_FILE}"))
 
 # output if you run it manually
 #echo "Download: $download Mbps"
