@@ -4,14 +4,15 @@ import os
 import requests
 from libtado.api import Tado
 
-DOMO_URL = os.environ['DOMO_URL']
-TADO_USR = os.environ['TADO_USR']
-TADO_PWD = os.environ['TADO_PWD']
-TADO_TOK = os.environ['TADO_TOK']
+DOMO_URL = os.environ["DOMO_URL"]
+TADO_USR = os.environ["TADO_USR"]
+TADO_PWD = os.environ["TADO_PWD"]
+TADO_TOK = os.environ["TADO_TOK"]
 
 MARTIJN_IDX = 193
 LEONIE_IDX = 209
 ANYONE_IDX = 434
+
 
 def update_status_domoticz(idx, at_home) :
     """update status in domoticz"""
@@ -19,11 +20,12 @@ def update_status_domoticz(idx, at_home) :
         return
 
     response = requests.get(f"{DOMO_URL}/json.htm?type=devices&rid={idx}")
-    if (response.json()['result'][0]['Status'] == 'On') != at_home :
+    if (response.json()["result"][0]["Status"] == "On") != at_home :
         requests.get(
             f"{DOMO_URL}/json.htm?type=command&param=switchlight&idx={idx}&switchcmd="
-            + ('On' if at_home else 'Off')
+            + ("On" if at_home else "Off")
         )
+
 
 def get_status_tado() :
     """get status tado"""
@@ -31,15 +33,16 @@ def get_status_tado() :
 
     users = tado.get_users()
 
-    martijn_at_home = users[1]['mobileDevices'][0]['location']
+    martijn_at_home = users[1]["mobileDevices"][0]["location"]
     if martijn_at_home is not None :
-        martijn_at_home = martijn_at_home['atHome']
+        martijn_at_home = martijn_at_home["atHome"]
 
-    leonie_at_home = users[0]['mobileDevices'][0]['location']
+    leonie_at_home = users[0]["mobileDevices"][0]["location"]
     if leonie_at_home is not None :
-        leonie_at_home = leonie_at_home['atHome']
+        leonie_at_home = leonie_at_home["atHome"]
 
     return (martijn_at_home, leonie_at_home)
+
 
 (martijn, leonie) = get_status_tado()
 
