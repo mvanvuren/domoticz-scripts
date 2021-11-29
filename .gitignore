@@ -28,8 +28,8 @@ __pycache__
 python/*
 !python/monit
 !python/tado
-!python/report-crash.py
-!python/uptime-domoticzpi.py
+!python/report_crash.py
+!python/uptime_domoticzpi.py
 
 shell/nas.sh
 
