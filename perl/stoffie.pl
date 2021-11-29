@@ -131,13 +131,14 @@ sub wakeup_stoffie {
 sub shutdown_stoffie {
 	get "$DOMO_URL/json.htm?type=command&param=switchlight&idx=$STOFFIE_SWITCH_IDX&switchcmd=Off";
 	send_message('Stoffie gaat slapen...');
+    domoticz_message('Stoffie reageert niet op ping. Controleer of Stoffie correct op de oplader staat.', 4); # error message
 	add_status('SHUTDOWN');
 	exit;
 }
 
 sub exit_if_not_ready {
 	my $p = Net::Ping->new('icmp');
-	my $ping = $p->ping($STOFFIE_IP);
+	my $ping = $p->ping($STOFFIE_IP, 10);
 	$p->close();
 	if (!$ping) {
 		shutdown_stoffie(); # Stoffie doesn't respond
@@ -227,6 +228,12 @@ sub log_message {
 
 	open my $file, '>>', $LOG_FILE or die $!;
 	print $file $message;
+}
+
+sub domoticz_message {
+    my ($message, $level) = @_;
+
+    get "$DOMO_URL/json.htm?type=command&param=addlogmessage&message=$message&level=$level";
 }
 
 1;
