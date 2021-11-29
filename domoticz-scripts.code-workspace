@@ -17,6 +17,14 @@
 		}
 	],
     "settings": {
-        "editor.detectIndentation": false
+        "editor.detectIndentation": false,
+        "cSpell.words": [
+            "DOMO",
+            "domoticz",
+            "mqtt",
+            "nvalue",
+            "svalue"
+        ],
+        "cSpell.enabled": true
     }
 }
