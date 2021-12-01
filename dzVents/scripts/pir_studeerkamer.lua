@@ -1,5 +1,4 @@
 local devicePirStudyRoom = 'PIR Studeerkamer'
-local deviceTemperature = 'Tado Studeerkamer - Temperatuur'
 local deviceHeatingEnabled = 'Tado Studeerkamer - Heating Enabled'
 local deviceSetPoint = 'Tado Studeerkamer - Setpoint'
 local setPoint = 19
@@ -20,8 +19,8 @@ return {
                         if (domoticz.devices(deviceHeatingEnabled).state == 'Off') then
                                 domoticz.devices(deviceHeatingEnabled).switchOn()
                                 domoticz.devices(deviceSetPoint).updateSetPoint(setPoint)
-                        end        
-                end                            
+                        end
+                end
 
 	end
 }
