@@ -8,9 +8,12 @@ use JSON qw( decode_json );
 my $DISKSTATION_URL = $ENV{DISKSTATION_URL};
 my $DOMO_URL = $ENV{DOMO_URL};
 my $DISKSTATION_USR = $ENV{DISKSTATION_USR};
+#my $DISKSTATION_USR = "api";
 my $DISKSTATION_PWD = $ENV{DISKSTATION_PWD};
+#my $DISKSTATION_PWD = "!qNaR\$";
 
-my $json = get_json("$DISKSTATION_URL/webapi/entry.cgi?api=SYNO.API.Auth&method=login&version=6&account=$DISKSTATION_USR&passwd=$DISKSTATION_PWD&session=SurveillanceStation&format=sid");
+my $authUrl = "$DISKSTATION_URL/webapi/entry.cgi?api=SYNO.API.Auth&method=login&version=6&account=$DISKSTATION_USR&passwd=$DISKSTATION_PWD&session=SurveillanceStation&format=sid";
+my $json = get_json($authUrl);
 
 my $synoToken = $json->{'data'}->{'sid'};
 
