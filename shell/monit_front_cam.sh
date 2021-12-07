@@ -2,9 +2,9 @@
 if ping -c 1 "$IPC_FRONT_IP" >/dev/null; then
 	(
 		sleep 3
-		echo root
+		echo "$IPC_FRONT_USR"
 		sleep 3
-		echo ismart12
+		echo "$IPC_FRONT_PWD"
 		sleep 3
 		echo /media/mmcblk0p2/data/etc/scripts/99-rtsp-check status
 		echo wget -s "$HEALTHCHECKS_URL/ping/79ce12a6-bd81-4b8c-8105-31bb494be418"
