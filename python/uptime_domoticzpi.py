@@ -6,7 +6,7 @@ import paho.mqtt.client as mqtt
 from uptime import uptime
 
 IDX = 205
-MQTT_IP = "192.168.0.40"
+MQTT_IP = os.environ["MQTT_IP"]
 
 
 def format_uptime(uptime_in_seconds):
