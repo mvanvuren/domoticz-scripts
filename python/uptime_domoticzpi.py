@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """sets virtual sensor domoticz-uptime"""
-import os
 import json
+import os
 
 import paho.mqtt.client as mqtt
 from uptime import uptime
