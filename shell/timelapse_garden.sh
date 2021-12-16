@@ -20,7 +20,7 @@ if [[ "$now" > "$sunrise" ]] && [[ "$now" < "$sunset" ]]; then
 		Now=$(/bin/date +%Y%m%d%H%M%S)
 		SnapFile="${PHOTO_PATH}/timelapse/garden/timelapse$Now.jpg"
 
-		( ffmpeg -rtsp_transport tcp -i "IPC_GARDEN_RTSP/videoMain" -r 1 -vframes 1 "$SnapFile" >/dev/null 2>&1 )
+		( ffmpeg -rtsp_transport tcp -i "${IPC_GARDEN_RTSP}/videoMain" -r 1 -vframes 1 "$SnapFile" >/dev/null 2>&1 )
 
 		actualsize=$(du -k "$SnapFile" | cut -f 1)
 		if [ "$actualsize" -ge $minimumsize ]; then
@@ -30,7 +30,6 @@ if [[ "$now" > "$sunrise" ]] && [[ "$now" < "$sunset" ]]; then
 			if [ -e "$SnapFile" ]; then
 				rm "$SnapFile" # something went wrong
 			fi
-			log2domo "ERROR: $SnapFile"
 		fi
 	else
 		log2domo "ERROR: ping ${IPC_GARDEN_IP} failed" # script monit_garden_cam.sh should be able to fix this

@@ -6,7 +6,7 @@ LOG_DIR="${LOG_PATH}/lynis"
 REPORT="${LOG_DIR}/report-${HOST}.${DATE}.txt"
 DATA="${LOG_DIR}/report-data-${HOST}.${DATE}.txt"
 
-/usr/sbin/lynis audit system --cronjob >"${REPORT}"
+/usr/local/lynis/lynis audit system --cronjob >"${REPORT}"
 
 if [ -f /var/log/lynis-report.dat ]; then
 	mv /var/log/lynis-report.dat "${DATA}"

@@ -31,7 +31,6 @@ if [[ "$now" > "$sunrise" ]] && [[ "$now" < "$sunset" ]]; then
 			if [ -e "$SnapFile" ]; then
 				rm "$SnapFile" # something went wrong
 			fi
-			log2domo "ERROR: $SnapFile"
 		fi
 	else
 		log2domo "ERROR: ping ${IPC_FRONT_IP} failed" # script monit_front_cam.sh should be able to fix this
