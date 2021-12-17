@@ -16,7 +16,7 @@ return {
                     command = '/root/scripts/front.sh',
                     callback = 'callback',
                     timeout = 60,
-                })			
+                })
 
                 if (domoticz.time.isNightTime) then
                     if (domoticz.devices('Hal lamp').state == 'Off') then
