@@ -9,12 +9,6 @@ return {
                 domoticz.executeShellCommand("(/root/scripts/sms.sh '" .. text .. "')&")
                 smsVariable.set(text)
             end
-        end,
-        snapshotFront = function(domoticz)
-            domoticz.executeShellCommand('(/root/scripts/front.sh)&')
-        end,
-        snapshotGarden = function(domoticz)
-            domoticz.executeShellCommand('(/root/scripts/garden.sh)&')
         end
     }
 }
