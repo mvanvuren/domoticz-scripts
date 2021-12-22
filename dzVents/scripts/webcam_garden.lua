@@ -10,7 +10,7 @@ return {
         if webcam.isDevice then
             if (webcam.state == 'On' and domoticz.devices('FIO - Wind').gustMs < 10.0) then
                 domoticz.notify(webcam.name, 'start...')
-                domoticz.executeShellCommand({ 
+                domoticz.executeShellCommand({
                     command = '/root/scripts/garden.sh',
                     callback = 'callback',
                     timeout = 60,

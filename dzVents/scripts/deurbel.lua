@@ -12,7 +12,7 @@ return {
 
                 doorbell.switchOff().afterSec(30)
 
-                domoticz.executeShellCommand({ 
+                domoticz.executeShellCommand({
                     command = '/root/scripts/front.sh',
                     callback = 'callback',
                     timeout = 60,
