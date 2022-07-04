@@ -58,9 +58,10 @@ my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
 my $startTime=($hour*60)+$min;
 my $endTime=$startTime+$duration;
 
-my $url = "https://gps.buienradar.nl/getrr.php?lat=$LAT&lon=$LON";
-#print $url;
+my $url = "https://gpsgadget.buienradar.nl/data/raintext?lat=$LAT&lon=$LON";
+#print $url . "\n";
 my $response = $ua->get($url);
+#print $response->content;
 # TODO
 unless ($response->is_success) {
 	# hmm, let's retry
