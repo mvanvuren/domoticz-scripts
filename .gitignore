@@ -34,3 +34,4 @@ python/*
 shell/nas.sh
 
 templates/
+support/
