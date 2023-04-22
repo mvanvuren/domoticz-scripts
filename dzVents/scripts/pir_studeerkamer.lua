@@ -2,7 +2,7 @@ local devicePirStudyRoom = 'PIR Studeerkamer'
 local deviceHeatingEnabled = 'Tado Studeerkamer - Heating Enabled'
 local deviceSetPoint = 'Tado Studeerkamer - Setpoint'
 local deviceTemperature = 'Tado Studeerkamer - Temperatuur'
-local setPoint = 19
+local setPoint = 10
 
 return {
 	active = true,

@@ -38,7 +38,7 @@ my $STOFFIE_SWITCH_IDX = 373;
 my $STOFFIE_STATUS_IDX = 198;
 my $SECONDS_PER_DAY = 86400;
 my $SECONDS_PER_MINUTE = 60;
-my $MAX_WORKING_TIME_IN_MINUTES = 60;
+my $MAX_WORKING_TIME_IN_MINUTES = 240; # ERROR in algorithm?: charging takes longer than 60 minutes
 my %SCHEDULED_DAYS = ( 1 => 'Mon', 2 => 'Tue', 3 => 'Wed', 4 => 'Thu' );
 my $SCHEDULED_START_HOUR = 13;
 my $SCHEDULED_END_HOUR = 17;
@@ -62,11 +62,11 @@ my $is_working = $states[-1] eq 'WORKING';
 my $has_started_working = $is_working || exists($status{'WORKING'});
 my $working_time_in_minutes = int((time - $domo_lasttime) / $SECONDS_PER_MINUTE);
 my $max_working_time_reached = $is_working && ($working_time_in_minutes > $MAX_WORKING_TIME_IN_MINUTES || $stoffie_battery == 20);
-my $finished_cleaning = $ready_to_clean && $has_started_working; # status: 
+my $finished_cleaning = $ready_to_clean && $has_started_working;
 
 exit_if_max_working_time_reached() if ($max_working_time_reached);
 finish_cleaning() if ($finished_cleaning);
-start_cleaning() if ($ready_to_clean);
+start_cleaning() if ($ready_to_clean); 
 
 ##########################################################################################################
 sub get_switch_status_domoticz {

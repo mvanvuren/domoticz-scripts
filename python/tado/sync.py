@@ -21,6 +21,7 @@ def update_status_domoticz(idx, at_home):
         return
 
     response = requests.get(f"{DOMO_URL}/json.htm?type=devices&rid={idx}")
+    # print(response.json())
     if (response.json()["result"][0]["Status"] == "On") != at_home:
         requests.get(
             f"{DOMO_URL}/json.htm?type=command&param=switchlight&idx={idx}&switchcmd="
@@ -33,7 +34,7 @@ def get_status_tado():
     tado = Tado(TADO_USR, TADO_PWD, TADO_TOK)
 
     users = tado.get_users()
-
+    # print(users)
     martijn_at_home = users[1]["mobileDevices"][0]["location"]
     if martijn_at_home is not None:
         martijn_at_home = martijn_at_home["atHome"]
