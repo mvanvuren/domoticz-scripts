@@ -20,12 +20,13 @@ def update_status_domoticz(idx, at_home):
     if at_home is None:
         return
 
-    response = requests.get(f"{DOMO_URL}/json.htm?type=devices&rid={idx}")
+    response = requests.get(f"{DOMO_URL}/json.htm?type=devices&rid={idx}", verify='/root/.local/share/mkcert/rootCA.pem')
     # print(response.json())
     if (response.json()["result"][0]["Status"] == "On") != at_home:
         requests.get(
             f"{DOMO_URL}/json.htm?type=command&param=switchlight&idx={idx}&switchcmd="
             + ("On" if at_home else "Off")
+            , verify='/root/.local/share/mkcert/rootCA.pem'
         )
 
 
