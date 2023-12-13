@@ -16,9 +16,9 @@ my ($second, $minute, $hour, $dayOfMonth, $month, $yearOffset, $dayOfWeek, $dayO
 
 # network available?
 my $p = Net::Ping->new();
-if (!$p->ping($ROUTER_IP)) { # gateway can't be reached
+if (!$p->ping($ROUTER_IP)) { # router can't be reached
 	print("router can't be reached");
-	exit;
+	exit 1;
 }
 $p->close();
 my $db_path = dirname(__FILE__);
@@ -36,7 +36,7 @@ while($row = $dbselect->fetchrow_hashref()) {
 	my $present = $p->ping($row->{IpAddress});
 	$p->close();
 
-	print "$row->{Name} ($row->{IpAddress}):  $present\n";
+  # print "$row->{Name} ($row->{IpAddress}):  $present\n";
 
 	my $idx = $row->{Idx};
 	if ($present) {
@@ -64,4 +64,4 @@ sub get_json {
 	return decode_json($json);
 }
 
-1;
+exit 0;

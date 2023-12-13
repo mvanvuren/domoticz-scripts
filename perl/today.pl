@@ -33,7 +33,7 @@ my %idx = (
 my $parser = DateTime::Format::Strptime->new( pattern => '%Y-%m-%d %H:%M:%S' );
 my $today = DateTime->today();
 my $message = '';
-my $json = get_json("$DOMO_URL/json.htm?type=devices&filter=light&used=true");
+my $json = get_json("$DOMO_URL/json.htm?type=command&param=getdevices&filter=light&used=true");
 my @alldevices = @{ $json->{'result'} };
 for my $device (@alldevices) {
 	my $idx = $device->{'idx'};

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 LOG_FILE="${LOG_PATH}/clamav/clamav-$(date +'%Y-%m-%d').log"
 MAIL_MSG="Please see the log file attached."
 DIRTOSCAN="/root"

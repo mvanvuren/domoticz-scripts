@@ -27,11 +27,11 @@ def get_monit_data():
 def update_healthchecks(is_monit_alive, all_services_alive):
     """update healtchecks"""
     urllib.request.urlopen(
-        f"{HEALTHCHECKS_URL}/ping/ce7ae874-0d0d-4f7b-8f23-3e93231f831d"
+        f"{HEALTHCHECKS_URL}/ping/316afc48-66ab-4f8b-93aa-d136fce90591"
         + ("/fail" if not is_monit_alive else "")
     )
     urllib.request.urlopen(
-        f"{HEALTHCHECKS_URL}/ping/09316e6e-b76b-4aed-8551-e91769836454"
+        f"{HEALTHCHECKS_URL}/ping/a1eb7af1-7fe8-4934-b836-2965c8084967"
         + ("/fail" if not all_services_alive else "")
     )
 

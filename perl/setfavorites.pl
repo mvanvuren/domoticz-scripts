@@ -7,7 +7,7 @@ use constant { true => 1, false => 0 };
 
 my $DOMO_URL = $ENV{DOMO_URL};
 
-my $url = "$DOMO_URL/json.htm?type=devices&filter=light&used=true"; # get devices
+my $url = "$DOMO_URL/json.htm?type=command&param=getdevices&filter=light&used=true"; # get devices
 my $json = get $url; 
 die "Could not get $url!" unless defined $json;
 my $decoded_json = decode_json($json);

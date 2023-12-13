@@ -70,7 +70,7 @@ start_cleaning() if ($ready_to_clean);
 
 ##########################################################################################################
 sub get_switch_status_domoticz {
-	my $json = get_json("$DOMO_URL/json.htm?type=devices&rid=$STOFFIE_SWITCH_IDX");
+	my $json = get_json("$DOMO_URL/json.htm?type=command&param=getdevices&rid=$STOFFIE_SWITCH_IDX");
 	my $result = $json->{'result'}[0];
 	my $domo_switch_status = $result->{'Status'};
 	my $domo_switch_status_lasttime = str2time($result->{'LastUpdate'});
@@ -80,7 +80,7 @@ sub get_switch_status_domoticz {
 }
 
 sub get_status_domoticz {
-	my $json = get_json("$DOMO_URL/json.htm?type=devices&rid=$STOFFIE_STATUS_IDX");
+	my $json = get_json("$DOMO_URL/json.htm?type=command&param=getdevices&rid=$STOFFIE_STATUS_IDX");
 	my $result = $json->{'result'}[0];
 	my $domo_status = $result->{'Data'};
 	my $domo_status_lasttime = str2time($result->{'LastUpdate'});
