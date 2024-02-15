@@ -4,7 +4,7 @@ return {
         devices = {"Woonkamerdeur"}
     },
     execute = function(domoticz, livingRoomDoor)
-        if (livingRoomDoor.state == "Open" and domoticz.time.isNightTime) then
+        if (livingRoomDoor.active and domoticz.time.isNightTime) then
             if (domoticz.devices("Hal lamp").state == "Off") then
                 domoticz.devices("Hal lamp").switchOn()
             end
