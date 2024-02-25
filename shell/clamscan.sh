@@ -8,7 +8,7 @@ for S in ${DIRTOSCAN}; do
 
 	echo "Starting a weekly scan of $S directory. Amount of data to be scanned is $DIRSIZE."
 
-	clamscan -ri "${S}" >>"${LOG_FILE}"
+	clamscan --recursive --infected --log="${LOG_FILE}" "${S}"
 
 	# get the value of "Infected lines"
 	MALWARE=$(tail "${LOG_FILE}" | grep Infected | cut -d" " -f3)
